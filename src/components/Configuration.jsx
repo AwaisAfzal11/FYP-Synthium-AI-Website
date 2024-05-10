@@ -3,12 +3,20 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
+import CodeEditor from './CodeEditor';
+// import CodeEditor from "@monaco-editor/react";
 
 
 function Configuration() {
     const [setshowSettingDropdown, setsetshowSettingDropdown] = useState(false);
     const [setshowModelDropdown, setsetshowModelDropdown] = useState(true);
+    // const [code, setCode] = useState(''); // Initialize code state
     const navigate = useNavigate();
+    
+    // const handleChange = (value) => {
+    //     setCode(value);
+    // };
+
 
     const handleSettingClick = () => {
         setsetshowSettingDropdown(!setshowSettingDropdown);
@@ -29,9 +37,9 @@ function Configuration() {
     return (
         <>
             <Navbar />
-            <div className="mx-auto ml-[25%] w-[70%] mr-[50px]">
+            <div className="flex">
                 <Sidebar />
-                <div>
+                <div className='mx-auto w-[70%]'>
                     <h1 className='text-[36px] mt-[15px]'>Project-Name</h1>
                     <div className="flex flex-row gap-5 mt-8 mb-2">
                         <button onClick={handleModelClick} className="hover hover:underline">
@@ -123,9 +131,13 @@ function Configuration() {
                         <h3 className='text-[18px] my-3'>We've chosen a model configuration based on your selections.</h3>
                     </div>
 
-                    <div>
-                        <p>.yml file here</p>
+                    {/* Code Editor here */}
+                    <div className="flex-1 p-4 text-purple-500">
+                        {/* Use the CodeEditor component here */}
+                        <CodeEditor  />
+                        {/* value={code} onChange={handleChange} */}
                     </div>
+                    {/* Code Editor here */}
 
                     <div className='flex justify-center items-center  mb-[-30px]'>
                         <button onClick={handleSelectModel} className="bg-purple-500 py-[10px] px-[15px] text-white text-[20px]  mb-[15px]  mt-[50px] border-white rounded-md">Continue</button>

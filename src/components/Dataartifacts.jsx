@@ -17,12 +17,6 @@ function UploadDropdown({ title, position }) {
     console.log('Uploaded file:', file.name);
   };
 
-  
-
-  // const handleClick = () => {
-  //   navigate('/dashboard/newproject/dataartifacts/configuration');
-  // };
-
   return (
     <div className="relative">
       <div
@@ -69,9 +63,9 @@ function Dataartifacts() {
   return (
     <>
       <Navbar />
-      <div className="mx-auto ml-[25%] w-[70%] mr-[50px]">
+      <div className="flex">
         <Sidebar />
-        <div>
+        <div className='mx-auto w-[70%]'>
           <h1 className='text-[36px] mt-[15px]'>Project-Name</h1>
           <div className="flex flex-row gap-5 mt-8 mb-2">
             <button onClick={handleModelClick} className="hover hover:underline">
@@ -98,7 +92,7 @@ function Dataartifacts() {
 
           {/* for setting and deleting of project */}
           {setshowSettingDropdown && (
-            <div>
+            <div className='mx-auto '>
               <div className='border rounded-md border-purple-500'>
                 <h2 className='ml-5 mt-5 text-[24px] font-bold'>Project Details</h2>
                 <div className='flex flex-row ml-5 mt-5 text-[14px] gap-10'>
@@ -167,11 +161,6 @@ function Dataartifacts() {
 
           </div>
 
-          {/* main div for uploading data artifact */}
-          {/* <div className="border border-gray-300 p-4 mb-4">
-            <UploadDropdown title="I have a data artifact ready to upload" position="below" />
-            <UploadDropdown title="I'd like to connect to my external data source" position="below" />
-          </div> */}
           <div className="border border-gray-300 p-4 mb-20 pb-10">
             <div className="border border-gray-300 p-4 mb-[100px]">
               <UploadDropdown title="I have a data artifact ready to upload" position="below" />

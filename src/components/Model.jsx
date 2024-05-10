@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import { IoIosArrowForward } from "react-icons/io";
+
 function Model() {
   const [setshowSettingDropdown, setsetshowSettingDropdown] = useState(false);
   const [setshowModelDropdown, setsetshowModelDropdown] = useState(true);
@@ -25,9 +26,9 @@ function Model() {
   return (
     <>
       <Navbar />
-      <div className="mx-auto ml-[25%] w-[70%] mr-[50px]">
+      <div className="flex ">
         <Sidebar />
-        <div>
+        <div className='mx-auto w-[70%]'>
           <h1 className='text-[36px] mt-[15px]'>Project-Name</h1>
           <div className="flex flex-row gap-5 mt-8 mb-2">
             <button onClick={handleModelClick} className="hover hover:underline">
@@ -42,7 +43,7 @@ function Model() {
           
           {setshowSettingDropdown && (
             <div>
-              <div className='border rounded-md border-purple-500'>
+              <div className='border rounded-md border-color-7'>
                 <h2 className='ml-5 mt-5 text-[24px] font-bold'>Project Details</h2>
                 <div className='flex flex-row ml-5 mt-5 text-[14px] gap-10'>
                   <div>
@@ -86,8 +87,8 @@ function Model() {
 
                   </div>
                 </div>
-                <hr className="mb-[30px] opacity-70 border border-purple-500" />
-                <button className="bg-purple-500 ml-4 mb-4  text-white text-[14px] px-6 py-2 mt-[-10px] border-white rounded-md">Save</button>
+                <hr className="mb-[30px] opacity-70 border bg-color-7" />
+                <button className="bg-color-7 ml-4 mb-4  text-white text-[14px] px-6 py-2 mt-[-10px] border-white rounded-md">Save</button>
               </div>
 
               {/* del project */}
@@ -109,7 +110,7 @@ function Model() {
 
               <div className="mx-[0px] mt-[0px] mb-[0px] flex flex-col border-gray-300 border rounded-lg rounded-tr-[30px] rounded-br-[0px] rounded-tl-[0px] rounded-bl-[30px]">
                 <div className='flex flex-row gap-10 my-10 mx-4'>               
-                  <div className='  text-purple-500' style={{ borderBottom: '4px solid', paddingBottom: '2px', display: 'inline-block' }}>Step-1 Model</div>
+                  <div className='  text-color-7' style={{ borderBottom: '4px solid', paddingBottom: '2px', display: 'inline-block' }}>Step-1 Model</div>
                   <IoIosArrowForward />
                   <div>Step-2 Input Data</div>
                   <IoIosArrowForward />
@@ -132,18 +133,18 @@ function Model() {
               </div>
 
 
-              <div className="mx-[0px] mt-[0px] mb-[0px] flex flex-col  border-gray-300 border rounded-lg rounded-tr-[30px] rounded-br-[0px] rounded-tl-[0px] rounded-bl-[30px]">
-                <button className="border-purple-500 border-2 text-left mt-4 hover hover:bg-purple-500 mx-[30px] my-[10px] p-[10px]">
+              <div className="mx-[0px] mt-[0px] mb-[0px] flex flex-col  border-color-7 border rounded-lg rounded-tr-[30px] rounded-br-[0px] rounded-tl-[0px] rounded-bl-[30px]">
+                <button className="bg-black border-2 text-left mt-4 hover mx-[30px] my-[10px] p-[10px]">
                   <h2 className="text-xl font-bold">CT-GAN</h2>
                   <p className="text-sm">AI model for tabular data synthesis.</p>
                 </button>
-                <button className="border-purple-500 border-2 text-left mt-4  mx-[30px] my-[10px] p-[10px] hover hover:bg-purple-500">
+                <button className="bg-black border-2 text-left mt-4  mx-[30px] my-[10px] p-[10px] hover hover:border-color-7">
                   <h2 className="text-xl font-bold">DGAN</h2>
                   <p className="text-sm">AI model for time-series data synthesis</p>
                 </button>
 
                 <div className="flex justify-center mt-4">
-                  <button onClick={handleSelectModel} className="bg-purple-500 ml-4 mb-4  text-white text-[14px] px-6 py-2 mt-[-10px] border-white rounded-md">
+                  <button onClick={handleSelectModel} className="bg-color-7 ml-4 mb-4  text-white text-[14px] px-6 py-2 mt-[-10px] border-white rounded-md">
                     Continue
                   </button>
                 </div>

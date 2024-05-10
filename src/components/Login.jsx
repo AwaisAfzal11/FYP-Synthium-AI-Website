@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
-import { backend_api_base_url } from "../constants";
+import { useNavigate } from 'react-router-dom';
+import { login } from '../utils/backend_api';
 
 
 const LoginForm = () => {
@@ -8,9 +8,11 @@ const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     // const [accessToken, setAccessToken] = useState('');
 
     const handleSubmit = async (event) => {
+        console.log('check')
         event.preventDefault();
 
         if (!username || !password) {
@@ -20,26 +22,14 @@ const LoginForm = () => {
             }, 3000);
             return;
         }
-
-        const formData = new URLSearchParams();
-        formData.append('grant_type', 'password');
-        formData.append('username', username);
-        formData.append('password', password);
-
-        const options = {
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'accept': 'application/json',
-            },
-        };
-
+    
         try {
             setLoading(true);
-            const response = await axios.post(backend_api_base_url+'/auth/token', formData.toString(), options);
+            const response = await login(username, password)
             const accessToken = response.data.access_token;
             // setAccessToken(accessToken);
             sessionStorage.setItem('access_token', accessToken); // Save the access token in session storage
-            window.location.href = '/dashboard';
+            navigate('/dashboard');
         } catch (error) {
             console.error(error);
             if (error.response && error.response.data && error.response.data.error_description) {
@@ -101,7 +91,7 @@ const LoginForm = () => {
                     <div className="flex justify-center">
                         <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-purple-500 text-black"></div>
                     </div>
-                )}
+                )} 
             </div>
         </div>
     );

@@ -93,8 +93,6 @@ export const brainwaveServicesIcons = [
   sliders04,
 ];
 
-export const backend_api_base_url = 'https://wjhn0hxw-8000.inc1.devtunnels.ms'
-
 export const roadmap = [
   {
     id: "0",

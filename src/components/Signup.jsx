@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
-import { backend_api_base_url } from "../constants";
+import { useNavigate } from 'react-router-dom';
+import { signup } from '../utils/backend_api';
+
 
 const SignupForm = () => {
     const [alert, setAlert] = useState('');
@@ -9,6 +10,7 @@ const SignupForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false); // Track loading state
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,6 +24,7 @@ const SignupForm = () => {
             return;
         }
 
+        // SignUp form Rules
         // if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
         //     setAlert('Please enter a valid email address.');
         //     setTimeout(() => {
@@ -38,25 +41,13 @@ const SignupForm = () => {
         //     return;
         // }
 
-        const formData = {
-            'first_name': firstName,
-            'last_name': lastName,
-            'email': email,
-            'password': password
-        };
-
-        const options = {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
 
         try {
             setLoading(true); // Set loading state to true
-            const response = await axios.post(backend_api_base_url+'/auth/', JSON.stringify(formData), options);
+            const response = await signup(firstName, lastName, email, password)
             console.log(response.data);
             // Redirect to login page
-            window.location.href = '/login';
+            navigate('/login');
         } catch (error) {
             console.error(error);
             // Handle signup error, e.g., show an error message

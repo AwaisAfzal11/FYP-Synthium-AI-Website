@@ -15,7 +15,7 @@ import Configuration from "./components/Configuration";
 import Activity from "./components/Activity";
 import LoginForm from "./components/Login";
 import SignupForm from "./components/Signup";
-
+import Userprofile from "./components/Userprofile";
 import Model from "./components/Model";
 
 const App = () => {
@@ -23,26 +23,25 @@ const App = () => {
     <>
       <Routes>
         <Route path="/" element={<>
-          <Header />       
+          <Header />
           <Hero />
           <Benefits />
           <Pricing />
           <Footer />
         </>} />
-        <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/newproject" element={<Model />} />
-        <Route path="/dashboard/newproject/dataartifacts" element={<Dataartifacts />} /> {/* Add this line */}       
-        <Route path="/dashboard/newproject/dataartifacts/configuration" element={<Configuration />} />    
-        <Route path="/dashboard/newproject/dataartifacts/configuration/activity" element={<Activity />} />
+        <Route path="/dashboard/newproject/dataartifacts" element={<Dataartifacts />} />
+        <Route path="/dashboard/newproject/dataartifacts/configuration" element={<Configuration />} />
         <Route path="/dashboard/newproject/dataartifacts/configuration/activity" element={<Activity />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/signup" element={<SignupForm />} />
-
+        <Route path="/userprofile" element={<Userprofile />} />
+        {/* <Route path="/userprofile" element={<><Navbar handleLogout={handleLogout} /><Sidebar handleLogout={handleLogout} /><Userprofile /></>} /> */}
       </Routes>
       <ButtonGradient />
 
     </>
   );
 };
-
 export default App;
