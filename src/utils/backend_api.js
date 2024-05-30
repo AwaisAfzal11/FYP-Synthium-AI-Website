@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://wjhn0hxw-8000.inc1.devtunnels.ms';
+const baseURL = 'http://127.0.0.1:8000';
 
 export const fetchData = async () => {
   try {
@@ -97,7 +97,7 @@ export const create_new_project = async (accessToken, name, description) => {
         },
   };
 
-  const response = await axios.post(`${baseURL}/get_all_projects`, JSON.stringify(formData), options);
+  const response = await axios.post(`${baseURL}/create_new_project`, JSON.stringify(formData), options);
 
   return response;
 };

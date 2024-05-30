@@ -12,11 +12,15 @@ import moment from 'moment';
 
 
 function Dashboard() {
+  const [alert, setAlert] = useState('');
   const [showModal, setShowModal] = useState(false);
   // const [showHelloDropdown, setShowHelloDropdown] = useState(false);
   const [loading, setLoading] = useState(true);
   const [get_projects_loading, set_get_projects_Loading] = useState(true);
+  const [create_new_project_loading, set_create_new_project_loading] = useState(false);
   const [projects, setProjects] = useState([]);
+  const [new_project_name, set_new_project_name] = useState('');
+  const [new_project_description, set_new_project_description] = useState('');
   const navigate = useNavigate();
 
   const main_screen_loader_spinner = () => {
@@ -62,27 +66,26 @@ function Dashboard() {
           }
           setLoading(false); // Set loading to false after authentication check.
         });
-
-
     }
   }, []);
 
   // Fetch All Projects
   useEffect(() => {
     const accessToken = sessionStorage.getItem('access_token');
-    const get_all_projects_response = get_all_projects(accessToken)
+    get_all_projects(accessToken)
       .then((response) => {
         // Token is valid, continue on the same page
         console.log("Projects Fetched Successfully...");
         console.log(response);
-        setProjects(response.data.projects);
+        // Bubble Sort To Sort the Projects by their creation time
+        const sorted_projects = response.data.projects.sort((a, b) => new Date(b.created_on) - new Date(a.created_on))
+        setProjects(sorted_projects);
         set_get_projects_Loading(false); // Set loading to false after successful authentication
       })
       .catch((error) => {
         console.error(error);
         set_get_projects_Loading(false); // Set loading to false after authentication check
       });
-    console.log(get_all_projects_response)
 
   }, []);
 
@@ -101,9 +104,39 @@ function Dashboard() {
   //   setShowModal(false);
   // };
 
-  const handleCreateProject = () => {
-    // Perform any necessary actions before navigating
-    navigate('/dashboard/newproject');
+  const handleCreateProject = async (event) => {
+    set_create_new_project_loading(true)
+    event.preventDefault();
+
+    const accessToken = sessionStorage.getItem('access_token');
+
+    // Basic checks
+    if (!new_project_name || !new_project_description) {
+      setAlert('Please fill in all fields.');
+      setTimeout(() => {
+          setAlert('');
+      }, 3000);
+      set_create_new_project_loading(false);
+      return;
+    }
+
+    create_new_project(accessToken, new_project_name, new_project_description)
+    .then((response) => {
+      // if 200 succcess then this will run.
+      console.log("New Project Created! Let's go...")
+      console.log(response)
+      set_create_new_project_loading(false); // Set loading to false after successful authentication
+      // navigate('/dashboard/newproject');
+      navigate(`/project/${response.data.project_id}`);
+    })
+    .catch((error) => {
+      console.error(error);
+      if (error.response) {
+        setAlert('Error occurred while creating new project!');
+      }
+      set_create_new_project_loading(false); // Set loading to false after authentication check.
+    });
+    
   };
 
   // const handleShowHelloDropdown = () => {
@@ -139,28 +172,44 @@ function Dashboard() {
 
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-                    <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div className="inline-block align-bottom bg-n-7 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                      <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div>
-                          <h2 className='text-black font-bold text-[24px]'>New Project</h2>
+                          <h2 className='font-bold text-[24px]'>New Project</h2>
                         </div>
 
                         <div>
-                          <p className='text-gray-700 text-[16px] mt-[8px] mb-[10px]'>Create and manage your personal projects</p>
-                          <h2 className='text-[14px] text-black font-bold'>Project Name</h2>
+                          <p className='text-[16px] mt-[8px] mb-[10px]'>Create and manage your personal projects</p>
+                          {alert && (
+                              <p className="text-red-500">{alert}</p>
+                          )}
+                          <h2 className='text-[14px] font-bold'>Project Name</h2>
                           <input
+                            id="new_project_name"
                             type="text"
-                            placeholder="Enter your Project Name"
-                            className="w-[100%] mt-[0px] mb-[40px] bg-color-7 border placeholder-white border-gray-300 rounded-md px-3 py-2  text-white "
+                            value={new_project_name}
+                            onChange={(event) => set_new_project_name(event.target.value)}
+                            placeholder="Enter Project Name"
+                            className="w-[100%] mb-5 bg-black border placeholder-gray-400 border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-color-7"
                           />
-                          <h2 className='text-[14px] text-black font-bold'>Project Description</h2>
+                          <h2 className='text-[14px] font-bold'>Project Description</h2>
                           <input
-                            type="textarea"
-                            placeholder="Enter your Project Name"
-                            className="w-[100%] mt-[0px] mb-[40px] bg-color-7 border placeholder-white border-gray-300 rounded-md px-3 py-2  text-white "
+                            id="new_project_description"
+                            type="text"
+                            value={new_project_description}
+                            onChange={(event) => set_new_project_description(event.target.value)}
+                            placeholder="Enter Project Description"
+                            className="resize-y w-[100%] mb-[40px] bg-black border placeholder-gray-400 border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-color-7"
                           />
                           {/* <button onClick={handleCloseModal} className="  bg-purple-500 text-white text-[14px] p-3 mt-[-10px] border-white rounded-md">Create Project</button> */}
-                          <button onClick={handleCreateProject} className="bg-color-7 text-white text-[14px] p-3 mt-[-10px] border-white rounded-md">Create Project</button>
+                          <div className="flex items-center justify-between">
+                            <button type="submit" onClick={handleCreateProject} className="bg-color-7 text-white text-[14px] p-3 mt-[-10px] border-white rounded-md">Create Project</button>
+                              {create_new_project_loading && (
+                                  <div className="flex justify-center">
+                                    <div className="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-purple-500 text-black"></div>
+                                  </div>
+                              )} 
+                          </div>
                         </div>
 
                       </div>
@@ -196,8 +245,7 @@ function Dashboard() {
 
                       <li key={project.project_id} className="mb-2">
 
-                        <div className='flex flex-row justify-between border p-4 ml-1 hover:border-color-7'>
-                          
+                        <div className='flex flex-row justify-between border p-4 ml-1 hover:border-color-7 cursor-pointer' onClick={() => navigate(`/project/${project.project_id}`)}>
 
                           <div className='flex flex-col w-[300px]'>
                             {/* Project Name */}

@@ -7,6 +7,7 @@ import { FaClipboardList } from "react-icons/fa";
 import { BsFillFileBarGraphFill } from "react-icons/bs";
 import { GrConfigure } from "react-icons/gr";
 import CodeEditor from './CodeEditor';
+import { IoDownloadOutline } from "react-icons/io5";
 
 
 
@@ -68,7 +69,7 @@ function Activity() {
                                             className="w-full mt-0 mb-2 border border-gray-300 rounded-md px-3 py-2 text-white bg-black"
                                         />
                                         <p className="text-sm text-white">A human read-able title for your project</p>
-                                    </div>                                
+                                    </div>
                                 </div>
 
                                 <div className=' flex flex-row ml-5 mt-5 text-[14px] gap-10'>
@@ -82,9 +83,9 @@ function Activity() {
                                             className="w-full mt-0 mb-2 border border-gray-300 rounded-md px-3 py-2 text-white bg-black"
                                         />
                                         <p className="text-sm text-white">Project name should be unique</p>
-                                    </div>                                
+                                    </div>
                                 </div>
-                                
+
                                 <div className=' flex flex-row ml-5 mt-5 text-[14px] gap-10 mb-6'>
                                     <div>
                                         <h3>Description</h3>
@@ -96,7 +97,7 @@ function Activity() {
                                             className="w-full mt-0 mb-2 border border-gray-300 rounded-md px-3 py-2 text-white bg-black"
                                         />
                                         <p className="text-sm text-white">A Brief Description of your project.</p>
-                                    </div>                                
+                                    </div>
                                 </div>
 
                                 <hr className="mb-[30px] opacity-70 border border-color-7" />
@@ -126,44 +127,53 @@ function Activity() {
                     </div>
 
                     <div>
-                        <div className="flex flex-row gap-[0px] mt-8 mb-2  py-8">
+                        <div className="flex flex-row gap-[0px] mt-8 mb-[200px]  py-8 ">
 
                             {/* Downlaod */}
-                            <button onClick={() => handleButtonClick('Downloads')} className="px-[20px] flex text-[25px] flex-row gap-1 border p-2 hover hover:bg-purple-800">
-                                <FaClipboardList className='mx-[10px]' />  Downloads
+                            <button onClick={() => handleButtonClick('Downloads')} className="px-[20px]  flex text-[25px] flex-row gap-1 border p-2 hover hover:bg-purple-800">
+                                <FaClipboardList className='mx-[10px] ' />  Downloads
                             </button>
                             {openButton === 'Downloads' && (
-                                <div className="absolute   border border-gray-200 my-[80px] gap-5">
-                                    <h1 className='text-[24px] m-[10px]'>Records</h1>
+                                <div className="absolute   border border-gray-200 mt-[80px]  gap-5 w-[70%] ">
+                                    <h1 className='text-[30px] my-[10px]'>Records</h1>
                                     {/* All functionality */}
                                     <div className=' mb-5 border border-gray-200 grid grid-cols-3'>
-                                        <div className='flex flex-col'><h1>Results</h1>
+                                        <div className='flex flex-col my-[10px] ml-[10px]'><h1 className=''>Results</h1>
                                             <p>file name</p>
                                         </div>
-                                        <div className='mr-[24px]'><h1>Created on</h1> <p>12/12/23</p></div>
-                                        <div><h1>Status</h1> <p>Done</p></div>
+                                        <div className='mr-[24px] my-[10px] ml-[10px]'><h1>Created on</h1> <p>12/12/23</p></div>
+                                        <div className='my-[10px] ml-[10px]'><h1>Status</h1> <p>Done</p></div>
 
                                     </div>
 
                                     <h1 className='text-[24px] m-[10px]'>Addtional Downloads</h1>
                                     {/* All functionality */}
-                                    <div className='grid grid-cols-3'>
-                                        <div className=''>
-                                            <div className='flex flex-row gap-10 my-2'>
-                                                <h1>pagkage_log.json</h1> <button className='border border-purple-500'>Download</button>
-                                            </div>
-                                            <div className='flex flex-row gap-10 my-2'>
-                                                <h1>pagkage_log.json</h1> <button className='border border-purple-500'>Download</button>
-                                            </div>
-                                            <div className='flex flex-row gap-10'>
-                                                <h1>pagkage_log.json</h1> <button className='border border-purple-500'>Download</button>
-                                            </div>
+
+                                    <div className='flex flex-col '>
+                                        
+                                        <div className='flex flex-row justify-between border border-gray-500  '>
+                                            <h1 className='order-1 my-[10px]'>package_log.json</h1>
+                                            <button className='order-2  text-[25px] my-[10px]'><IoDownloadOutline /></button>
                                         </div>
-
-
+                                        <div className='flex flex-row justify-between border border-gray-500  '>
+                                            <h1 className='order-1 my-[10px]'>package_log.json</h1>
+                                            <button className='order-2  text-[25px] my-[10px]'><IoDownloadOutline /></button>
+                                        </div>
+                                        <div className='flex flex-row justify-between border border-gray-500  '>
+                                            <h1 className='order-1 my-[10px]'>package_log.json</h1>
+                                            <button className='order-2  text-[25px] my-[10px]'><IoDownloadOutline /></button>
+                                        </div>
+                                        <div className='flex flex-row justify-between border border-gray-500  '>
+                                            <h1 className='order-1 my-[10px]'>package_log.json</h1>
+                                            <button className='order-2  text-[25px] my-[10px]'><IoDownloadOutline /></button>
+                                        </div>
+                                       
+                                        
                                     </div>
+
                                 </div>
-                            )}
+                                
+                                )}
 
                             {/* Config */}
                             <button onClick={() => handleButtonClick('Config')} className=" px-[20px] border gap-2 flex flex-row p-2 text-[25px] hover hover:bg-purple-800">
@@ -174,6 +184,7 @@ function Activity() {
                                     <CodeEditor />
                                 </div>
                             )}
+                                    
 
                             {/* Report */}
                             <button onClick={() => handleButtonClick('Report')} className="flex text-[25px] flex-row px-[20px] gap-1  border p-2 hover hover:bg-purple-800">

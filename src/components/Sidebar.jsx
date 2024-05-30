@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 // import React from 'react';
 import { FaSignOutAlt } from "react-icons/fa";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 // import { AiTwotoneDashboard } from "react-icons/ai";
 
@@ -24,7 +26,7 @@ function SideBar() {
                     <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-black">
                         <ul className="space-y-2 font-medium">
 
-                        
+
                             <li>
                                 <a href="/" className="sidebar-button flex flex-row gap-4">
                                     {/* <AiTwotoneDashboard /> */}
@@ -39,6 +41,19 @@ function SideBar() {
                                     <span className="mt-[-3px]">Logout</span>
                                 </button>
                             </li>
+
+                                {/* <Link to="/dashboard/newproject/dataartifacts/configuration/activity/user" className="sidebar-button flex flex-row gap-4">
+                                    <FaUser />
+                                    <span className="mt-[-3px]">Profile</span>
+                                </Link> */}
+                            <li>
+                                <a href="/dashboard/newproject/dataartifacts/configuration/activity/user" className="sidebar-button flex flex-row gap-4">
+                                    <FaUser />
+                                    <span className="mt-[-3px]">Profile</span>
+                                </a>
+                                
+                            </li>
+                            
 
                         </ul>
                     </div>

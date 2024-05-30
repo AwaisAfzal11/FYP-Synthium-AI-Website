@@ -12,7 +12,7 @@ function Configuration() {
     const [setshowModelDropdown, setsetshowModelDropdown] = useState(true);
     // const [code, setCode] = useState(''); // Initialize code state
     const navigate = useNavigate();
-    
+
     // const handleChange = (value) => {
     //     setCode(value);
     // };
@@ -37,9 +37,9 @@ function Configuration() {
     return (
         <>
             <Navbar />
-            <div className="flex">
+            <div className="flex ">
                 <Sidebar />
-                <div className='mx-auto w-[70%]'>
+                <div className='mx-auto  w-[70%]'>
                     <h1 className='text-[36px] mt-[15px]'>Project-Name</h1>
                     <div className="flex flex-row gap-5 mt-8 mb-2">
                         <button onClick={handleModelClick} className="hover hover:underline">
@@ -132,15 +132,15 @@ function Configuration() {
                     </div>
 
                     {/* Code Editor here */}
-                    <div className="flex-1 p-4 text-purple-500">
-                        {/* Use the CodeEditor component here */}
-                        <CodeEditor  />
-                        {/* value={code} onChange={handleChange} */}
+                    <div className="flex-1  w-[100%]">
+                        <div className='w-[100%]'>
+                            <CodeEditor />
+                        </div>
                     </div>
                     {/* Code Editor here */}
 
-                    <div className='flex justify-center items-center  mb-[-30px]'>
-                        <button onClick={handleSelectModel} className="bg-purple-500 py-[10px] px-[15px] text-white text-[20px]  mb-[15px]  mt-[50px] border-white rounded-md">Continue</button>
+                    <div className='flex justify-center items-center mb-[30px]'>
+                        <button onClick={handleSelectModel} className="bg-purple-500 py-[10px] px-[15px] text-white text-[20px]  mb-[15px]  mt-[10px] border-white rounded-md">Continue</button>
                     </div>
 
                 </div>
