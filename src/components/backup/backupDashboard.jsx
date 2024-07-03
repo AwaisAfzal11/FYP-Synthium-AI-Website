@@ -24,37 +24,6 @@ function Dashboard() {
   const [new_project_description, set_new_project_description] = useState('');
   const navigate = useNavigate();
 
-  function formatDateTime(dateString) {
-  // Parse the input date string
-  const date = new Date(dateString);
-
-  // Options for date and time formatting
-  const options = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZone: 'UTC'  // Specify UTC time zone
-  };
-
-  // Format the date in UTC
-  const formattedUTC = new Intl.DateTimeFormat('en-US', options).format(date);
-
-  // Get the local time offset in minutes
-  const offsetMinutes = date.getTimezoneOffset();
-
-  // Adjust the date for the local time zone
-  date.setMinutes(date.getMinutes() - offsetMinutes);
-
-  // Format the adjusted date in the local time zone
-  options.timeZone = undefined;  // Use the local time zone
-  const formattedLocal = new Intl.DateTimeFormat('en-US', options).format(date);
-
-  return formattedLocal;
-}
-
   // Check Authentication
   useEffect(() => {
     const accessToken = sessionStorage.getItem('access_token');
@@ -170,7 +139,7 @@ function Dashboard() {
             {/* pop up dialog box  */}
             <div>
               <div className="flex flex-row gap-[500px]">
-                <p className="text-[16px]">Create your Synthium AI projects</p>
+                <p className="text-[16px]">Create and manage your Gretel projects</p>
                 <button onClick={handleOpenModal} className="bg-color-7 text-white text-[14px] p-3 mt-[-10px] border-white rounded-md">New Project</button>
               </div>
 
@@ -234,7 +203,7 @@ function Dashboard() {
 
 
             </div>
-            <hr className="my-[30px] "/>
+            <hr className="my-[30px] opacity-70" />
 
             <div>
               {/* Search Bar */}
@@ -258,12 +227,9 @@ function Dashboard() {
 
                       <li key={project.project_id} className="mb-2">
 
-                        <div className='flex flex-row justify-between p-4 ml-1 rounded-lg hover:shadow-[15px_0_20px_-5px_#a855f7,_-15px_0_20px_-5px_#d900ff] cursor-pointer' onClick={() => navigate(`/project/${project.project_id}`)}>
+                        <div className='flex flex-row justify-between border p-4 ml-1 hover:border-color-7 cursor-pointer' onClick={() => navigate(`/project/${project.project_id}`)}>
 
-
-
-                          {/* First column */}
-                          <div className='flex flex-col w-[33%]'>
+                          <div className='flex flex-col w-[300px]'>
                             {/* Project Name */}
                             <div className='text-[16px] font-bold hover:text-color-7'>{project.name}</div>
                             {/* Project Description */}
@@ -274,9 +240,7 @@ function Dashboard() {
                             </div>
                           </div>
 
-
-                          {/* 2nd column */}
-                          <div className='flex flex-col items-start justify-between w-[33%]'>
+                          <div className='flex flex-col items-start justify-between'>
                             {/* <div className='flex flex-row gap-2'> < GiBrain /> Cloud Project</div> */}
                             {/* this is model pill */}
                             <div className="flex items-center space-x-1 text-sm px-2 bg-teal-950 rounded-full">
@@ -316,7 +280,7 @@ function Dashboard() {
                                     <div>Training</div>
                                   </div>
                                 )
-                              } else if (project.status == "completed") {
+                              } else if (project.status == "complete") {
                                 return (
                                   <div className="flex items-center space-x-1 text-sm px-2 bg-gray-700 rounded-full">
                                     <div className="bg-green-500 rounded-full w-[0.4rem] h-[0.4rem]"></div>
@@ -334,11 +298,9 @@ function Dashboard() {
                             })()}
                           </div>
 
-                          {/* 3rd column */}
-                          <div className='w-[23%]'>
+                          <div>
                             <div>Updated {moment.parseZone(project.updated_on).fromNow()}</div>
-                            {/* <div>Created At {`${new Date(project.created_on).getMonth() + 1}/${new Date(project.created_on).getDate()}/${new Date(project.created_on).getFullYear()}`}</div> */}
-                            <div>Created At {formatDateTime(project.created_on)}</div>
+                            <div>Created At {`${new Date(project.created_on).getMonth() + 1}/${new Date(project.created_on).getDate()}/${new Date(project.created_on).getFullYear()}`}</div>
                           </div>
 
                         </div>

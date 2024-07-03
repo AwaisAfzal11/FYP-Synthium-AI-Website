@@ -1,25 +1,11 @@
 import Editor from "@monaco-editor/react";
 import { useState } from "react";
 
-function CodeEditor() {
+function CodeEditor(props) {
   const [isEditable, setIsEditable] = useState(false);
-  const [code, setCode] = useState(`{
-    "name": "Muhammad Ishaq",
-    "gender": "Male",
-    "age": 23,
-    "address": {
-      "street": "87",
-      "city": "Gultari Matyal Skardu",
-      "state": "Gilgit Baltistan",
-      "postalCode": "16350"
-    },
-    "phoneNumber": [
-      {
-        "type": "personal",
-        "number": "116263747"
-      }
-    ]
-  }`);
+  const [code] = useState(props.code);
+  const setCode = props.setCode;
+  const setDisableButton = props.setDisableButton;
   const [buttonText, setButtonText] = useState('Edit');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -35,14 +21,15 @@ function CodeEditor() {
       }
     }
     setIsEditable(!isEditable);
+    setDisableButton(!isEditable);
     setButtonText(isEditable ? 'Edit' : 'Done');
   };
 
   return (
     <div className="flex-1 py-4">
-      <div className='flex flex-row items-center justify-between w-[100%] px-6 bg-black border border-gray-500 py-3'>
-        <p>tabular-actgan.yml</p>
-        <button className='border px-2 py-1' onClick={handleEdit}>{buttonText}</button>
+      <div className='flex flex-row items-center justify-between w-[100%] px-6 bg-black   py-3'>
+        <p>ctgan.csv</p>
+        <button className='border rounded-e-2xl px-2 py-1' onClick={handleEdit}>{buttonText}</button>
       </div>
       {errorMessage && <div className="text-red-500 p-2">{errorMessage}</div>}
       <Editor

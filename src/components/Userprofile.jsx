@@ -29,7 +29,7 @@ function Userprofile() {
                 setLoading(false); // Set loading to false after authentication check
               }
         }
-    }, []);
+    });
 
 
     if (loading) {

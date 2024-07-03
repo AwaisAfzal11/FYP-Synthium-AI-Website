@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
 
-function SelectModel({ onFormSubmit }) {
+function SelectModel({ onFormSubmit, projectData }) {
     // const { project_id } = useParams();
     const [alert, setAlert] = useState('');
     const [setshowSettingDropdown, setsetshowSettingDropdown] = useState(false);
@@ -45,7 +45,7 @@ function SelectModel({ onFormSubmit }) {
 
     return (
         <div>
-            <h1 className='text-[36px] mt-10'>Project-Name</h1>
+            <h1 className='text-[36px] mt-10'>{projectData.name}</h1>
             <div className="flex flex-row gap-5 mt-8 mb-2">
                 <button onClick={handleModelClick} className="hover hover:underline">
                     Model
@@ -69,7 +69,7 @@ function SelectModel({ onFormSubmit }) {
                                 <input
                                     type="text"
                                     placeholder="Enter your Project Name"
-                                    className="w-[100%] mt-[0px] mb-[7px] md:w-[290%] border border-gray-300 rounded-md px-3 py-2  text-white "
+                                    className="w-[70%] mt-[0px] mb-[7px] md:w-[270%] border border-gray-300 rounded-md px-3 py-2  text-white "
                                 />
                                 <p>A human read-able title for your project</p>
                             </div>
@@ -83,7 +83,7 @@ function SelectModel({ onFormSubmit }) {
                                 <input
                                     type="text"
                                     placeholder=""
-                                    className="  w-[100%] mt-[0px] mb-[7px] md:w-[360%] border border-gray-300 rounded-md px-3 py-2  text-white "
+                                    className="  w-[100%] mt-[0px] mb-[7px] md:w-[335%] border border-gray-300 rounded-md px-3 py-2  text-white "
                                 />
                                 <p className=''>Project Name should be unique.</p>
                             </div>
@@ -97,7 +97,7 @@ function SelectModel({ onFormSubmit }) {
                                 <input
                                     type="text"
                                     placeholder=""
-                                    className=" w-[100%] mt-[0px] mb-[7px] md:w-[340%] border border-gray-300 rounded-md px-3 py-2  text-white "
+                                    className=" w-[100%] mt-[0px] mb-[7px] md:w-[315%] border border-gray-300 rounded-md px-3 py-2  text-white "
                                 />
                                 <p>A brief description of the project.</p>
 
@@ -148,7 +148,7 @@ function SelectModel({ onFormSubmit }) {
                         </p>
                     </div>
 
-                    <div className="flex flex-col p-8 border-color-7 border rounded-lg rounded-tr-[30px] rounded-br-[0px] rounded-tl-[0px] rounded-bl-[30px]">
+                    <div className="flex flex-col p-8 border-color-7   hover:shadow-[15px_0_20px_-5px_#a855f7,_-15px_0_20px_-5px_#d900ff] border rounded-lg rounded-tr-[30px] rounded-br-[0px] rounded-tl-[0px] rounded-bl-[30px]">
                         <button
                             className={`bg-black border-2 text-left mb-[10px] p-[10px] ${selectedModel === 'ctgan' ? 'border-color-7' : ''
                                 }`}
@@ -171,7 +171,7 @@ function SelectModel({ onFormSubmit }) {
                         <div className="flex justify-center">
                             <button
                                 onClick={handleSelectModel}
-                                className="bg-color-7 text-white text-[14px] px-6 py-2 border-white rounded-md"
+                                className="bg-color-7 text-white text-[14px] px-6 py-2 mt-4 border-white rounded-md"
                             >
                                 Continue
                             </button>
